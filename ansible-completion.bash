@@ -39,6 +39,8 @@ _ansible_complete_host() {
         [ -f ansible.cfg ] && inventory_file=$(awk \
             '/^(hostfile|inventory)/{ print $3 }' ansible.cfg)
     fi
+    # if still nothing, take the default:
+    [ -z "$inventory_file" ] && inventory_file="/etc/ansible/hosts"
 
     # if the $inventory_file value is a variable (e.g $HOME), we evaluate that
     # variable to get the value.
